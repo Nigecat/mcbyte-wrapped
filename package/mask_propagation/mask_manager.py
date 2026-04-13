@@ -29,7 +29,7 @@ MASK_CREATION_BBOX_OVERLAP_THRESHOLD = 0.6
 
 
 class MaskManager(object):
-    def __init__(self):
+    def __init__(self, sam_checkpoint, cutie_checkpoint):
         self.masks = None # masks instances from image segmentation component (SAM)
         self.mask = None # mask isntances related to mask temporal propagator (Cutie)
         self.prediction = None
@@ -44,7 +44,6 @@ class MaskManager(object):
 
         # For SAM
         np.random.seed(0)
-        sam_checkpoint = "./sam_models/sam_vit_b_01ec64.pth"
         model_type = "vit_b"
         self.device = "cuda:0"
         self.sam = sam_model_registry[model_type](checkpoint=sam_checkpoint)
@@ -56,7 +55,7 @@ class MaskManager(object):
                 initialize(version_base='1.3.2', config_path=str(cutie_config_rel), job_name="eval_config")
                 cfg = compose(config_name="eval_config")
 
-                weight_path = Path(__file__).parent / "Cutie" / "weights" / "cutie-base-mega.pth"
+                weight_path = cutie_checkpoint
                 with open_dict(cfg):
                     cfg['weights'] = weight_path
                     # cfg['weights'] = './mask_propagation/Cutie/weights/cutie-base-mega.pth'
