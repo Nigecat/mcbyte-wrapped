@@ -212,76 +212,85 @@ class STrack(BaseTrack):
 
 class McByteLogger(object):
     def __init__(self, log_file_path):
-        self.file = open(log_file_path, "w")
+        # self.file = open(log_file_path, "w")
         np.set_printoptions(linewidth=1000)
 
     def __del__(self):
-        self.file.close()
+        # self.file.close()
+        pass
 
     def log_info(self):
         pass
 
     def log_frame_no(self, frame_no):
-        self.file.write("\n\n= = = = = = Frame number: " + str(frame_no) + " = = = = =\n\n")
+        pass
+        # self.file.write("\n\n= = = = = = Frame number: " + str(frame_no) + " = = = = =\n\n")
 
     def log_mask_info(self, tracklet_mask_dict):
-        self.file.write("tracklet_id -> mask_number:\n")
-        if tracklet_mask_dict is None:
-            self.file.write("< tracklet_mask_dict is None, probably frame(s) before creating the masks with SAM >")
-        else:
-            for k, v in tracklet_mask_dict.items():
-                self.file.write(str(k) + " -> " + str(v) + ", ")
-        self.file.write("\n\n") 
+        pass
+        # self.file.write("tracklet_id -> mask_number:\n")
+        # if tracklet_mask_dict is None:
+        #     self.file.write("< tracklet_mask_dict is None, probably frame(s) before creating the masks with SAM >")
+        # else:
+        #     for k, v in tracklet_mask_dict.items():
+        #         self.file.write(str(k) + " -> " + str(v) + ", ")
+        # self.file.write("\n\n") 
 
     def log_dists(self, dists, mask_match_included, which_association, frame_no):
-        self.file.write("Association step: " + str(which_association) + " (frame " + str(frame_no) + ")" + "\nMask match included: " + str(mask_match_included) + "\n\n")
-        self.file.write(str(dists) + "\n\n")
+        pass
+        # self.file.write("Association step: " + str(which_association) + " (frame " + str(frame_no) + ")" + "\nMask match included: " + str(mask_match_included) + "\n\n")
+        # self.file.write(str(dists) + "\n\n")
 
     def log_matches(self, matches, u_track, u_detection, strack_pool_ids):
-        self.file.write("matrix row -> tracklet_id:\n")
-        for i in range(len(strack_pool_ids)):
-            self.file.write(str(i) + " -> " + str(strack_pool_ids[i]) + ", ")
-        self.file.write("\n\n")        
+        pass
+        # self.file.write("matrix row -> tracklet_id:\n")
+        # for i in range(len(strack_pool_ids)):
+        #     self.file.write(str(i) + " -> " + str(strack_pool_ids[i]) + ", ")
+        # self.file.write("\n\n")        
 
-        self.file.write("matches [row column] [track det]:\n")# + str(matches) + "\n")
-        for match in matches:
-            self.file.write(str(match) + "\n")
-        self.file.write("u_track:\n" + str(u_track) + "\n")
-        self.file.write("u_detection:\n" + str(u_detection) + "\n")
+        # self.file.write("matches [row column] [track det]:\n")# + str(matches) + "\n")
+        # for match in matches:
+        #     self.file.write(str(match) + "\n")
+        # self.file.write("u_track:\n" + str(u_track) + "\n")
+        # self.file.write("u_detection:\n" + str(u_detection) + "\n")
+        pass
         
     def log_det_conf_scores(self, detections):
-        self.file.write("Detection confidence scores:\n")
-        for i, det in enumerate(detections):
-            self.file.write(str(i) + " : " + str(np.round(det.score, decimals=2)) + "\t")
-        self.file.write("\n\n")  
-        self.file.write("- - - - - - - - - -\n\n")
+        # self.file.write("Detection confidence scores:\n")
+        # for i, det in enumerate(detections):
+        #     self.file.write(str(i) + " : " + str(np.round(det.score, decimals=2)) + "\t")
+        # self.file.write("\n\n")  
+        # self.file.write("- - - - - - - - - -\n\n")
+        pass
 
     def log_local_update_trackets_ids(self, activated, refind, lost, removed):
-        self.file.write("activated_stracks: ")
-        for track in activated:
-            self.file.write(str(track.track_id) + ", ")
-        self.file.write(".\nrefind_stracks: ")
-        for track in refind:
-            self.file.write(str(track.track_id) + ", ")
-        self.file.write(".\nlost_stracks: ")
-        for track in lost:
-            self.file.write(str(track.track_id) + ", ")
-        self.file.write(".\nremoved_stracks: ")
-        for track in removed:
-            self.file.write(str(track.track_id) + ", ")
-        self.file.write(".\n\n")
+        # self.file.write("activated_stracks: ")
+        # for track in activated:
+        #     self.file.write(str(track.track_id) + ", ")
+        # self.file.write(".\nrefind_stracks: ")
+        # for track in refind:
+        #     self.file.write(str(track.track_id) + ", ")
+        # self.file.write(".\nlost_stracks: ")
+        # for track in lost:
+        #     self.file.write(str(track.track_id) + ", ")
+        # self.file.write(".\nremoved_stracks: ")
+        # for track in removed:
+        #     self.file.write(str(track.track_id) + ", ")
+        # self.file.write(".\n\n")
+        pass
 
     def log_state_tracklets_ids(self, tracked, lost, removed):
-        self.file.write("self.track_stracks: ")
-        for track in tracked:
-            self.file.write(str(track.track_id) + ", ")
-        self.file.write(".\nself.lost_stracks: ")
-        for track in lost:
-            self.file.write(str(track.track_id) + ", ")
-        self.file.write(".\nself.removed_stracks: ")
-        for track in removed:
-            self.file.write(str(track.track_id) + ", ")
-        self.file.write(".\n\n")
+        # self.file.write("self.track_stracks: ")
+        # for track in tracked:
+        #     self.file.write(str(track.track_id) + ", ")
+        # self.file.write(".\nself.lost_stracks: ")
+        # for track in lost:
+        #     self.file.write(str(track.track_id) + ", ")
+        # self.file.write(".\nself.removed_stracks: ")
+        # for track in removed:
+        #     self.file.write(str(track.track_id) + ", ")
+        # self.file.write(".\n\n")
+        pass
 
    
 class McByteTracker(object):
