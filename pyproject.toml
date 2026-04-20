@@ -30,8 +30,8 @@ yolox = { path = "./package", editable = true }
 cutie = { path = "./package/mask_propagation/Cutie", editable = true }
 segment-anything = { git = "https://github.com/facebookresearch/segment-anything.git" }
 
-# [tool.uv]
-# override-dependencies = ["numpy==1.23.5"]
+[tool.uv]
+override-dependencies = ["numpy==1.23.5"]
 
-# [tool.uv.extra-build-dependencies]
-# yolox = ["setuptools", "ninja", "torch"]
+[tool.uv.extra-build-dependencies]
+yolox = ["setuptools", "ninja", "torch"]
