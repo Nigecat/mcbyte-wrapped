@@ -44,6 +44,17 @@ build-backend = "setuptools.build_meta"
 # export LD_LIBRARY_PATH=$(python -c 'import os, torch; print(os.path.dirname(torch.__file__) + "/lib")'):$LD_LIBRARY_PATH && \
 # auditwheel repair -w {dest_dir} {wheel}
 # """
+[tool.cibuildwheel.linux]
+before-build = "pip install torch"
+repair-wheel-command = """
+export LD_LIBRARY_PATH=$(python -c 'import os, torch; print(os.path.dirname(torch.__file__) + "/lib")'):$LD_LIBRARY_PATH && \
+auditwheel repair \
+    --exclude libtorch.so \
+    --exclude libtorch_cpu.so \
+    --exclude libtorch_python.so \
+    --exclude libc10.so \
+    -w {dest_dir} {wheel}
+"""
 
 [tool.uv.sources]
 cutie = { path = "./mask_propagation/Cutie" }
