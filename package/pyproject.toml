@@ -46,5 +46,5 @@ build-backend = "setuptools.build_meta"
 # """
 
 [tool.uv.sources]
-cutie = { path = "./mask_propagation/cutie" }
+cutie = { path = "./mask_propagation/Cutie" }
 segment-anything = { git = "https://github.com/facebookresearch/segment-anything.git" }
