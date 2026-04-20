@@ -1,0 +1,29 @@
+[project]
+name = "yolox"
+requires-python = "==3.10.*"
+dynamic = ["version", "readme"]
+authors = [ { name = "basedet team" } ]
+
+[tool.setuptools]
+packages = { find = {} }
+
+[tool.setuptools.dynamic]
+version = { attr = "yolox.__version__" }
+readme = { file = ["README.md"] }
+
+[build-system]
+requires = [
+    "setuptools>=64",
+    "wheel",
+    "torch"
+]
+build-backend = "setuptools.build_meta"
+
+[tool.cibuildwheel]
+repair-wheel-command = """
+bash -c '
+export TORCH_LIB=$(python -c "import torch, os; print(os.path.join(os.path.dirname(torch.__file__), \"lib\"))")
+export LD_LIBRARY_PATH=$TORCH_LIB:$LD_LIBRARY_PATH
+auditwheel repair -w {dest_dir} {wheel}
+'
+"""
