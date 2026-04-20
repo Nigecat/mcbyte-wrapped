@@ -12,7 +12,6 @@ _CUTIE_ROOT = root / 'Cutie'
 sys.path.append(str(_CUTIE_ROOT))
 
 # Hydra config path (relative)
-cutie_config_rel = "Cutie/cutie/config"
 
 ### Cutie ###
 from omegaconf import open_dict
@@ -29,7 +28,7 @@ MASK_CREATION_BBOX_OVERLAP_THRESHOLD = 0.6
 
 
 class MaskManager(object):
-    def __init__(self, sam_checkpoint, cutie_checkpoint):
+    def __init__(self, cutie_config_rel, sam_checkpoint, cutie_checkpoint):
         self.masks = None # masks instances from image segmentation component (SAM)
         self.mask = None # mask isntances related to mask temporal propagator (Cutie)
         self.prediction = None
