@@ -5,14 +5,11 @@ import re
 import setuptools
 import glob
 from os import path
-import torch
-from torch.utils.cpp_extension import CppExtension
-
-torch_ver = [int(x) for x in torch.__version__.split(".")[:2]]
-assert torch_ver >= [1, 3], "Requires PyTorch >= 1.3"
-
 
 def get_extensions():
+    import torch
+    from torch.utils.cpp_extension import CppExtension
+
     #this_dir = path.dirname(path.abspath(__file__))
     extensions_dir = path.join(".", "yolox", "layers", "csrc")
 
@@ -39,6 +36,9 @@ def get_extensions():
 
     return ext_modules
 
+def get_build_extension():
+    import torch
+    return torch.utils.cpp_extension.BuildExtension
 
 with open("yolox/__init__.py", "r", encoding="utf-8") as f:
     version = re.search(
@@ -59,6 +59,6 @@ setuptools.setup(
     long_description=long_description,
     ext_modules=get_extensions(),
     classifiers=["Programming Language :: Python :: 3", "Operating System :: OS Independent"],
-    cmdclass={"build_ext": torch.utils.cpp_extension.BuildExtension},
+    cmdclass={"build_ext": get_build_extension()},
     packages=setuptools.find_namespace_packages(),
 )
